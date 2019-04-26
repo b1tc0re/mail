@@ -1,0 +1,25 @@
+{
+  "name": "b1tc0re/security-library",
+  "description": "Security library for DeftCMS",
+  "keywords": [
+    "b1tc0re",
+    "mail library"
+  ],
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "b1tc0re",
+      "email": "b1tc0re@yandex.ru",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "DeftCMS\\Components\\b1tc0re\Mail\\": "src/"
+    }
+  }
+}
