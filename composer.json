@@ -19,7 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "DeftCMS\\Components\\b1tc0re\Mail\\": "src/"
+      "DeftCMS\\Components\\b1tc0re\\Mail\\": "src/"
     }
   }
 }
