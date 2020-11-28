@@ -2,15 +2,15 @@
 
 use DeftCMS\Engine;
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') || exit('No direct script access allowed');
 
 /**
  * Исключаения
  *
  * @package     DeftCMS
  * @author	    b1tc0re
- * @copyright   2018 DeftCMS (https://deftcms.org/)
- * @since	    Version 0.0.1
+ * @copyright   2019-2020 DeftCMS (https://deftcms.ru/)
+ * @since	    Version 0.0.9
  */
 class ExceptionFactory extends \RuntimeException
 {

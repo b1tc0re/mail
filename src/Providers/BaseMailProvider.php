@@ -3,17 +3,17 @@
 use DeftCMS\Components\b1tc0re\Mail\IMailModel;
 use DeftCMS\Engine;
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') || exit('No direct script access allowed');
 
 /**
  * Base mail provider
  *
  * @package     DeftCMS\Components\b1tc0re\Mail
  * @author	    b1tc0re
- * @copyright   2018-2019 DeftCMS (https://deftcms.org/)
- * @since	    Version 0.0.2
+ * @copyright   2019-2020 DeftCMS (https://deftcms.ru/)
+ * @since	    Version 0.0.9
  */
-class BaseMailProvider
+class BaseMailProvider implements IProvider
 {
     /**
      * Mail model
@@ -43,13 +43,13 @@ class BaseMailProvider
     {
         if( !array_key_exists('model', $options) )
         {
-            Engine::$DT->load->model('Core/MailTemplates', 'MailTemplates');
-            $this->model = Engine::$DT->MailTemplates;
+            Engine::$DT->load->model('Core/BaseEmailTemplate', 'BaseEmailTemplate');
+            $this->model = Engine::$DT->BaseEmailTemplate;
         }
 
-        if( !array_key_exists('name', $options) )
+        if( !array_key_exists('service_email_title', $options) )
         {
-            $options['name'] = Engine::$DT->config->item('company')['s_company'];
+            $options['service_email_title'] = Engine::$DT->config->item('company')['s_company'];
         }
     }
 
@@ -58,11 +58,12 @@ class BaseMailProvider
      *
      * @param string $name название шаблона
      * @param string $to Кому отправить
+     * @param array $from От кого
      * @param array $extra Параметры для заменыв письме
      *
      * @return bool
      */
-    public function template($name, $to,  $extra = [])
+    public function template($name, $to, $from = null, $extra = [])
     {
         if( !$this->templates = Engine::$DT->cache->get('mail.templates') )
         {
@@ -78,7 +79,12 @@ class BaseMailProvider
 
         Engine::$DT->email->set_priority($this->templates[$name]['i_priority']);
 
-        return $this->send($this->templates[$name]['s_subject'], $this->interpolate($this->templates[$name]['s_message'], $extra), $to);
+        return $this->send(
+            $this->templates[$name]['s_subject'],
+            $this->interpolate($this->templates[$name]['s_message'], $extra),
+            $to,
+            $from
+        );
     }
 
     /**
@@ -92,19 +98,18 @@ class BaseMailProvider
      */
     public function send($subject, $message, $to, $from = null, $name = null)
     {
-        if( $from === null && !array_key_exists('from', $this->options) )
-        {
+        if ($from === null && !array_key_exists('from', $this->options)) {
             Engine::$Log->critical('Option form has required');
             throw new \InvalidArgumentException(sprintf('Option form has required'));
         }
-        elseif( $from === null && array_key_exists('from', $this->options) )
-        {
+
+        if($from === null && array_key_exists('from', $this->options)) {
             $from = $this->options['from'];
         }
 
-        if( $name === null && array_key_exists('name', $this->options) )
+        if( $name === null && array_key_exists('service_email_title', $this->options) )
         {
-            $name = $this->options['name'];
+            $name = $this->options['service_email_title'];
         }
 
         return Engine::$DT->email

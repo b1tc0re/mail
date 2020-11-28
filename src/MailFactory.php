@@ -6,7 +6,7 @@ use DeftCMS\Components\b1tc0re\Mail\Providers\SendMailProvider;
 use DeftCMS\Components\b1tc0re\Mail\Providers\SMTPMailProvider;
 use DeftCMS\Engine;
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') || exit('No direct script access allowed');
 
 /**
  * Обработчик отправки Mail сообшений
@@ -14,8 +14,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @package	    DeftCMS
  * @category	Model
  * @author	    b1tc0re
- * @copyright   (c) 2019, DeftCMS (http://deftcms.org)
- * @since	    Version 0.0.1
+ * @copyright   2019-2020 DeftCMS (https://deftcms.ru/)
+ * @since	    Version 0.0.9
  */
 class MailFactory
 {
