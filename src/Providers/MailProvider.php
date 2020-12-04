@@ -12,7 +12,7 @@ defined('BASEPATH') || exit('No direct script access allowed');
  * @copyright   2019-2020 DeftCMS (https://deftcms.ru/)
  * @since	    Version 0.0.9
  */
-class MailProvider extends BaseMailProvider implements IProvider
+class MailProvider extends BaseMailProvider
 {
     /**
      * SMTPMailProvider constructor.

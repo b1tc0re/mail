@@ -12,7 +12,7 @@ defined('BASEPATH') || exit('No direct script access allowed');
  * @copyright   2019-2020 DeftCMS (https://deftcms.ru/)
  * @since	    Version 0.0.9
  */
-class SMTPMailProvider extends BaseMailProvider implements IProvider
+class SMTPMailProvider extends BaseMailProvider
 {
 
     /**
@@ -61,5 +61,20 @@ class SMTPMailProvider extends BaseMailProvider implements IProvider
         ]);
 
         $this->options = $options;
+    }
+
+    /**
+     * Отправить email сообшение
+     *
+     * @param string $subject       - Тема письма
+     * @param string $message       - Сообшение
+     * @param string $to            - Email получателя
+     * @param string|null $from     - От кого отправляется почта
+     * @param string|null $name     - Имя отправителя
+     * @return bool
+     */
+    public function send($subject, $message, $to, $from = null, $name = null)
+    {
+        return parent::send($subject, $message, $to);
     }
 }

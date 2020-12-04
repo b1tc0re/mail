@@ -14,12 +14,13 @@ interface IProvider
 {
 
     /**
-     * Отправить e-mail сообшений
-     * @param string $subject
-     * @param string $message
-     * @param string $to
-     * @param string|null $from
-     * @param string|null $name
+     * Отправить email сообшение
+     *
+     * @param string $subject       - Тема письма
+     * @param string $message       - Сообшение
+     * @param string $to            - Email получателя
+     * @param string|null $from     - От кого отправляется почта
+     * @param string|null $name     - Имя отправителя
      * @return bool
      */
     public function send($subject, $message, $to, $from = null, $name = null);
@@ -28,8 +29,9 @@ interface IProvider
      * Отпавить сообшение по шаблону
      *
      * @param string $name название шаблона
-     * @param string $to Кому отправить
+     * @param string $to Email получателя
      * @param array $extra Параметры для заменыв письме
+     *
      * @return bool
      */
     public function template($name, $to, $extra = []);

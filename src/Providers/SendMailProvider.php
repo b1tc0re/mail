@@ -12,7 +12,7 @@ defined('BASEPATH') || exit('No direct script access allowed');
  * @copyright   2019-2020 DeftCMS (https://deftcms.ru/)
  * @since	    Version 0.0.9
  */
-class SendMailProvider extends BaseMailProvider implements IProvider
+class SendMailProvider extends BaseMailProvider
 {
 
     /**
@@ -44,37 +44,5 @@ class SendMailProvider extends BaseMailProvider implements IProvider
         ]);
 
         $this->options = $options;
-    }
-
-    /**
-     * Отправка сообшений
-     * @param string $subject
-     * @param string $message
-     * @param string $to
-     * @param string|null $from
-     * @param string|null $name
-     * @return bool
-     */
-    public function send($subject, $message, $to, $from = null, $name = null)
-    {
-        if( $from === null && !array_key_exists('form', $this->options) )
-        {
-            Engine::$Log->critical('Option form has required');
-            throw new \InvalidArgumentException(sprintf('Option form has required'));
-        }
-        elseif( $from === null && array_key_exists('form', $this->options) )
-        {
-            $from = $this->options['form'];
-        }
-
-        if( $name === null && !array_key_exists('name', $this->options) )
-        {
-            $name = '';
-        }
-
-        return Engine::$DT->email
-            ->from($from, $name)->to($to)
-            ->subject($subject)
-            ->message($message)->send();
     }
 }
