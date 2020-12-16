@@ -68,14 +68,14 @@ class MailFactory
      */
     public static function get()
     {
-        if( !array_key_exists('mail', Engine::$DT->config->item('settings') ?? []) )
+        if( !array_key_exists('email', Engine::$DT->config->item('settings') ?? []) )
         {
             throw Exceptions\ExceptionFactory::optionNotFound();
         }
 
         if( self::$instance === null )
         {
-            self::$instance = self::getHandler(Engine::$DT->config->item('settings')['mail']['protocol'], Engine::$DT->config->item('settings')['mail']);
+            self::$instance = self::getHandler(Engine::$DT->config->item('settings')['email']['protocol'], Engine::$DT->config->item('settings')['email']);
         }
 
         return self::$instance;
