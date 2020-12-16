@@ -35,4 +35,12 @@ interface IProvider
      * @return bool
      */
     public function template($name, $to, $extra = []);
+
+    /**
+     * Декодирование данных
+     *
+     * @param string $cipher - Закодированная строка
+     * @return array
+     */
+    public function decode($cipher);
 }
