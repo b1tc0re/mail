@@ -13,8 +13,8 @@ defined('BASEPATH') || exit('No direct script access allowed');
  *
  * @package     DeftCMS\Components\b1tc0re\Mail
  * @author	    b1tc0re
- * @copyright   2019-2020 DeftCMS (https://deftcms.ru/)
- * @since	    Version 0.0.9
+ * @copyright   2019-2022 DeftCMS (https://deftcms.ru/)
+ * @since	    Version 0.0.9a
  */
 class BaseMailProvider implements IProvider
 {
@@ -55,12 +55,6 @@ class BaseMailProvider implements IProvider
      */
     public function __construct(&$options = [])
     {
-        if( !array_key_exists('model', $options) )
-        {
-            Engine::$DT->load->model('Core/BaseEmailTemplate', 'BaseEmailTemplate');
-            $this->model = Engine::$DT->BaseEmailTemplate;
-        }
-
         if( !array_key_exists('service_email_title', $options) )
         {
             $options['service_email_title'] = Engine::$DT->config->item('company')['s_company'];
@@ -137,7 +131,7 @@ class BaseMailProvider implements IProvider
         $message .= '<img alt="1px" height="1" width="1" src="' . $this->getWatchUrl($to) . '" />';
         Engine::$DT->email->set_header('List-Unsubscribe', $this->getUnsubscriptionUrl($to));
 
-        return Engine::$DT->email
+        return  Engine::$DT->email
             ->from($from, $name)
             ->to($to)
             ->subject($subject)
